@@ -31,3 +31,11 @@ function operate(operator,a,b){
         return divide(a,b);
     }
 }
+
+const display = document.querySelector(".display");
+
+const displayValue = 0;
+
+display.textContent = displayValue;
+
+console.log(display);

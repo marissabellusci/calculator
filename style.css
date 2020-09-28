@@ -1,0 +1,43 @@
+html {
+    text-align: center;
+    margin: auto;
+    width: 50vw;
+}
+
+.digit-buttons{
+    text-align: center;
+    justify-content: center;
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    grid-template-rows: 20vh 20vh 20vh;
+}
+
+.operator-buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: fit-content;
+    margin: auto;
+    margin: 0 auto 0 auto;
+}
+
+.equals-and-clear-buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+
+}
+
+.calculator-grid-container {
+    display: grid;
+    grid-template-columns: 80% 20%;
+    grid-template-rows: 90% 10%;
+    justify-content: center;
+    padding: 5px 5px 5px 5px;
+}
+
+.equals,
+.clear{
+    font-weight: bold;
+}
