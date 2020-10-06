@@ -77,17 +77,16 @@ function clearDisplayValue(){
 
 //SAVE VALUE and SAVE OPERATION
 function saveValueAndOperation(e){
-    //e.stopPropagation();
-    //if (e.target =e.target == container || e.target == html || e.target == body || e.target == title || e.target == display || e.target == digitButtons || e.target.value == undefined){
-     //   return;
-   // }
     console.log("saving value!");
+    localStorage.setItem("number",display.textContent);
 
     console.log("saving operation");
+    localStorage.setItem("operator",e.target.textContent);
+    console.log(e.target.textContent);
 }
 
 //Event listeners
 
 digits.forEach(digit => digit.addEventListener("click", updateDisplayValue));
-operators.forEach(operator => {operator.addEventListener("click", saveValueAndOperation)})
+operators.forEach(operator => operator.addEventListener("click", saveValueAndOperation))
 clr.addEventListener("click",clearDisplayValue)
