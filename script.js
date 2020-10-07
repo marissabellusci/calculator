@@ -45,7 +45,7 @@ let body = document.querySelector("body");
 let title = document.querySelector("h1");
 let digitButtons = document.querySelector("digit-buttons");
 let clr = document.querySelector(".clear");
-let operated = false;
+let operationSelected = false;
 
 
 let displayValue = 0;
@@ -58,17 +58,17 @@ function updateDisplayValue(e){
         return;
     }
     console.log(e.target.value);
-    if (displayValue == 0 || operated == true){
+    if (displayValue == 0 || operationSelected == true){
     displayValue = e.target.value;
     display.textContent=displayValue;
-    operated = false;
+    operationSelected = false;
     }
 
 
     else {
     displayValue = displayValue + e.target.value;
     display.textContent = displayValue;
-    operated = false;    
+    operationSelected = false;    
     }
 }
 
@@ -81,8 +81,15 @@ function clearDisplayValue(){
     localStorage.removeItem("firstNumber");
     localStorage.removeItem("operator");
     localStorage.removeItem("secondNumber");
-    operated = false;
+    operationSelected = false;
 }
+
+//OPERATE!!
+function operate(){
+    let solution = localStorage.getItem("firstNumber") + localStorage.getItem("operator") + localStorage.getItem("secondNumber");
+    console.log(solution);
+}
+
 
 //SAVE VALUE and SAVE OPERATION
 function saveValueAndOperation(e){
@@ -97,13 +104,13 @@ function saveValueAndOperation(e){
     }
 
     if(localStorage.getItem("operator")){
-        console.log("we'll need to operate.");
+       operate();
     }
 
     if(!localStorage.getItem("operator")){
     console.log("saving operation");
     localStorage.setItem("operator",e.target.textContent);
-    operated = true;
+    operationSelected = true;
     }
     
 }
