@@ -1,7 +1,7 @@
 //Basic operator logic
 
 function add(a,b){
-    return a + b;
+    return +a + +b;
 }
 
 function subtract(a,b){
@@ -138,6 +138,12 @@ function operate(){
         }    
 
         if (localStorage.getItem("operator") == "/"){
+            if (b == 0) {
+                clearDisplayValue();
+                alert("How DARE you!");
+            }
+
+            else {
             solution = divide(a,b);
             console.log(solution);
             localStorage.setItem("firstNumber", solution);
@@ -147,6 +153,7 @@ function operate(){
             localStorage.removeItem("solution");
             localStorage.removeItem("secondNumber");
             localStorage.removeItem("operator");
+            }
         } 
         
     }
@@ -193,6 +200,12 @@ function operate(){
             }    
     
             if (localStorage.getItem("operator") == "/"){
+                if (b == 0){
+                    clearDisplayValue();
+                    alert("How DARE you!");
+                }
+
+                else {
                 solution = divide(a,b);
                 console.log(solution);
                 localStorage.setItem("firstNumber", solution);
@@ -202,6 +215,7 @@ function operate(){
                 localStorage.removeItem("solution");
                 localStorage.removeItem("secondNumber");
                 localStorage.removeItem("operator");
+                }
             }    
            
     }
