@@ -45,7 +45,10 @@ let body = document.querySelector("body");
 let title = document.querySelector("h1");
 let digitButtons = document.querySelector("digit-buttons");
 let clr = document.querySelector(".clear");
+let equals = document.querySelector(".equals");
 let operationSelected = false;
+let noSecondNumber = true;
+let solution = null;
 
 
 let displayValue = 0;
@@ -54,22 +57,27 @@ const display = document.querySelector(".display");
 //SHOW DISPLAY NUMBER
 
 function updateDisplayValue(e){
-    if (e.target == container || e.target == html || e.target == body || e.target == title || e.target == display || e.target == digitButtons || e.target.value == undefined){
-        return;
-    }
-    console.log(e.target.value);
-    if (displayValue == 0 || operationSelected == true){
-    displayValue = e.target.value;
-    display.textContent=displayValue;
-    operationSelected = false;
-    }
+        if (e.target == container || e.target == html || e.target == body || e.target == title || e.target == display || e.target == digitButtons || e.target.value == undefined){
+            return;
+         }
+         console.log(e.target.value);
+         if (displayValue == 0 || operationSelected == true){
+        displayValue = e.target.value;
+        display.textContent=displayValue;
+        operationSelected = false;
+        }
 
 
-    else {
-    displayValue = displayValue + e.target.value;
-    display.textContent = displayValue;
-    operationSelected = false;    
-    }
+        else {
+        displayValue = displayValue + e.target.value;
+        display.textContent = displayValue;
+        operationSelected = false;    
+        }
+    
+        
+
+
+console.log("updating");
 }
 
 //CLEAR!!
@@ -81,19 +89,130 @@ function clearDisplayValue(){
     localStorage.removeItem("firstNumber");
     localStorage.removeItem("operator");
     localStorage.removeItem("secondNumber");
+    localStorage.removeItem("solution");
     operationSelected = false;
+    
 }
 
 //OPERATE!!
 function operate(){
-    let solution = localStorage.getItem("firstNumber") + localStorage.getItem("operator") + localStorage.getItem("secondNumber");
-    console.log(solution);
+
+    if(localStorage.getItem("secondNumber")){
+    let a = localStorage.getItem("firstNumber");
+    let b = localStorage.getItem("secondNumber");
+        
+        if (localStorage.getItem("operator") == "+"){
+            solution = add(a,b);
+            console.log(solution);
+            localStorage.setItem("firstNumber", solution);
+            localStorage.setItem("solution",solution);
+            
+            display.textContent = localStorage.getItem("solution");
+            localStorage.removeItem("solution");
+            localStorage.removeItem("secondNumber");
+            localStorage.removeItem("operator");
+        }    
+
+        if (localStorage.getItem("operator") == "-"){
+            solution = subtract(a,b);
+            console.log(solution);
+            localStorage.setItem("firstNumber", solution);
+            localStorage.setItem("solution",solution);
+            
+            display.textContent = localStorage.getItem("solution");
+            localStorage.removeItem("solution");
+            localStorage.removeItem("secondNumber");
+            localStorage.removeItem("operator");
+        }    
+
+        if (localStorage.getItem("operator") == "x"){
+            solution = multiply(a,b);
+            console.log(solution);
+            localStorage.setItem("firstNumber", solution);
+            localStorage.setItem("solution",solution);
+            
+            display.textContent = localStorage.getItem("solution");
+            localStorage.removeItem("solution");
+            localStorage.removeItem("secondNumber");
+            localStorage.removeItem("operator");
+        }    
+
+        if (localStorage.getItem("operator") == "/"){
+            solution = divide(a,b);
+            console.log(solution);
+            localStorage.setItem("firstNumber", solution);
+            localStorage.setItem("solution",solution);
+            
+            display.textContent = localStorage.getItem("solution");
+            localStorage.removeItem("solution");
+            localStorage.removeItem("secondNumber");
+            localStorage.removeItem("operator");
+        } 
+        
+    }
+
+    if(!localStorage.getItem("secondNumber")){
+        let a = localStorage.getItem("firstNumber");
+        localStorage.setItem("secondNumber",display.textContent);
+        let b = localStorage.getItem("secondNumber");
+            
+            if (localStorage.getItem("operator") == "+"){
+                solution = add(a,b);
+                console.log(solution);
+                localStorage.setItem("firstNumber", solution);
+                localStorage.setItem("solution",solution);
+                
+                display.textContent = localStorage.getItem("solution");
+                localStorage.removeItem("solution");
+                localStorage.removeItem("secondNumber");
+                localStorage.removeItem("operator");
+            }    
+    
+            if (localStorage.getItem("operator") == "-"){
+                solution = subtract(a,b);
+                console.log(solution);
+                localStorage.setItem("firstNumber", solution);
+                localStorage.setItem("solution",solution);
+                
+                display.textContent = localStorage.getItem("solution");
+                localStorage.removeItem("solution");
+                localStorage.removeItem("secondNumber");
+                localStorage.removeItem("operator");
+            }    
+    
+            if (localStorage.getItem("operator") == "x"){
+                solution = multiply(a,b);
+                console.log(solution);
+                localStorage.setItem("firstNumber", solution);
+                localStorage.setItem("solution",solution);
+
+                display.textContent = localStorage.getItem("solution");
+                localStorage.removeItem("solution");
+                localStorage.removeItem("secondNumber");
+                localStorage.removeItem("operator");
+            }    
+    
+            if (localStorage.getItem("operator") == "/"){
+                solution = divide(a,b);
+                console.log(solution);
+                localStorage.setItem("firstNumber", solution);
+                localStorage.setItem("solution",solution);
+                
+                display.textContent = localStorage.getItem("solution");
+                localStorage.removeItem("solution");
+                localStorage.removeItem("secondNumber");
+                localStorage.removeItem("operator");
+            }    
+           
+    }
+    
+    
 }
 
 
 //SAVE VALUE and SAVE OPERATION
 function saveValueAndOperation(e){
-    if (localStorage.getItem("firstNumber")){
+    if (localStorage.getItem("firstNumber") && noSecondNumber == false){
         console.log("saving second value!")
         localStorage.setItem("secondNumber",display.textContent);
     }
@@ -104,10 +223,16 @@ function saveValueAndOperation(e){
     }
 
     if(localStorage.getItem("operator")){
+    
        operate();
+       localStorage.setItem("operator",e.target.textContent);
+       localStorage.removeItem("secondNumber");
+       noSecondNumber == true;
+       operationSelected = true;
+        
     }
 
-    if(!localStorage.getItem("operator")){
+    if(!localStorage.getItem("operator") || noSecondNumber == true){
     console.log("saving operation");
     localStorage.setItem("operator",e.target.textContent);
     operationSelected = true;
@@ -115,8 +240,15 @@ function saveValueAndOperation(e){
     
 }
 
+function secondNumberFlag(){
+    noSecondNumber = true;
+}
+
 //Event listeners
 
 digits.forEach(digit => digit.addEventListener("click", updateDisplayValue));
 operators.forEach(operator => operator.addEventListener("click", saveValueAndOperation))
-clr.addEventListener("click",clearDisplayValue)
+clr.addEventListener("click",clearDisplayValue);
+equals.addEventListener("click",operate);
+equals.addEventListener("click", secondNumberFlag);
+
