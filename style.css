@@ -1,12 +1,20 @@
 html {
     text-align: center;
-    margin: auto;
-    width: 50vw;
+    background-image: url(img/cover-large.png);
+    background-size: 100% 100%;
+    background-position-y: bottom;
+    background-position-x: right;
+    font-family: 'Sansita Swashed', cursive;
+
 }
 
 body {
     border: solid;
     border-radius: 10px;
+    margin: auto;
+    width: 50vw;
+    background: white;
+    box-shadow: 20px 20px 20px rgba(0, 0, 0, 0.329);
     
 
 }
@@ -14,6 +22,12 @@ body {
 .display {
     font-size: 4rem;
     margin: 0;
+    width: 70%;
+    text-align: center;
+    margin: auto;
+    border: solid gray;
+    box-shadow: 2px 2px 2px inset black;
+    background: whitesmoke;
 }
 
 .digit-buttons{
@@ -45,6 +59,7 @@ div.digit {
     justify-content: center;
     margin: 0;
     cursor: pointer;
+    box-shadow: 2px 2px 2px gray, 3px 3px 3px lightgray;
 }
 
 .digit {
@@ -53,11 +68,19 @@ div.digit {
     color: gray;
 }
 
+.digit:hover,
+.operator:hover,
+.equals:hover,
+.clear:hover{
+    box-shadow: 2px 2px 2px inset gray, 3px 3px 3px inset lightgray;
+}
+
 .operator {
     margin: auto;
     background: thistle;
     color: white;
     font-size: 3rem;
+    box-shadow: 2px 2px 2px gray, 3px 3px 3px lightgray;
 }
 
 .operator-buttons {
@@ -71,6 +94,7 @@ div.digit {
     margin: auto;
     background: rgba(216, 191, 216, 0.192);
     border-radius: 5px;
+    box-shadow: 2px 2px 2px gray, 3px 3px 3px lightgray;
 }
 
 .equals-and-clear-buttons{
