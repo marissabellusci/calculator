@@ -4,12 +4,60 @@ html {
     width: 50vw;
 }
 
+body {
+    border: solid;
+    border-radius: 10px;
+    
+
+}
+
+.display {
+    font-size: 4rem;
+    margin: 0;
+}
+
 .digit-buttons{
     text-align: center;
     justify-content: center;
     display: grid;
     grid-template-columns: 33% 33% 33%;
     grid-template-rows: 20vh 20vh 20vh;
+    height: 65vh;
+}
+
+div.digit {
+    border: none;
+    background:none;
+}
+
+.digit,
+.operator,
+.equals,
+.clear {
+    border: solid;
+    border-radius: 50%;
+    padding: 2vw;
+    width: 4vw;
+    height: 4vw;
+    font-size: 3vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    cursor: pointer;
+}
+
+.digit {
+    margin: auto;
+    background: tan;
+    color: gray;
+}
+
+.operator {
+    margin: auto;
+    background: thistle;
+    color: white;
+    font-size: 3rem;
 }
 
 .operator-buttons {
@@ -18,15 +66,32 @@ html {
     justify-content: space-between;
     align-items: center;
     width: fit-content;
-    margin: auto;
     margin: 0 auto 0 auto;
+    height: 65vh;
+    margin: auto;
+    background: rgba(216, 191, 216, 0.192);
+    border-radius: 5px;
 }
 
 .equals-and-clear-buttons{
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
+    transform: translateY(-7vw);
+}
 
+.equals {
+    transform: translateX(-5vw);
+    background: rgb(100, 58, 58);
+    color: white;
+    border-color: black;
+}
+
+.clear {
+    transform: translateX(5vw);
+    background:  rgb(100, 58, 58);
+    color: white;
+    border-color: black;
 }
 
 .calculator-grid-container {
