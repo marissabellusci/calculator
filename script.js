@@ -337,7 +337,73 @@ function secondNumberFlag(){
 function handleKey(e){
     console.log(e.keyCode);
 
-    if (e.keyCode < 48 || e.keyCode > 57) return;
+    if (e.keyCode == 13 || e.key == "="){
+        operate();
+    }
+
+    if (e.keyCode < 48 || e.keyCode > 57 && !e.keyCode == 187 || !e.keyCode == 191 || !e.keyCode == 189 || !e.keyCode == 13) return;
+
+    if (e.key == "*"){
+
+        if (localStorage.getItem("firstNumber") && noSecondNumber == false){
+            console.log("saving second value!")
+            localStorage.setItem("secondNumber",display.textContent);
+        }
+    
+        if(!localStorage.getItem("firstNumber")){
+            console.log("saving first value!");
+            localStorage.setItem("firstNumber",display.textContent);
+        }
+
+        if(localStorage.getItem("operator")){
+    
+            operate();
+            localStorage.setItem("operator","x");
+            localStorage.removeItem("secondNumber");
+            noSecondNumber == true;
+            operationSelected = true;
+             
+         }
+     
+         if(!localStorage.getItem("operator") || noSecondNumber == true){
+         console.log("saving operation");
+         localStorage.setItem("operator","x");
+         operationSelected = true;
+         }
+         return
+
+    }
+
+    else if (e.key == "+" || e.key == "-" || e.key == "/"){
+
+        if (localStorage.getItem("firstNumber") && noSecondNumber == false){
+            console.log("saving second value!")
+            localStorage.setItem("secondNumber",display.textContent);
+        }
+    
+        if(!localStorage.getItem("firstNumber")){
+            console.log("saving first value!");
+            localStorage.setItem("firstNumber",display.textContent);
+        }
+
+        if(localStorage.getItem("operator")){
+    
+            operate();
+            localStorage.setItem("operator", e.key);
+            localStorage.removeItem("secondNumber");
+            noSecondNumber == true;
+            operationSelected = true;
+             
+         }
+     
+         if(!localStorage.getItem("operator") || noSecondNumber == true){
+         console.log("saving operation");
+         localStorage.setItem("operator", e.key);
+         operationSelected = true;
+         }
+         return
+
+    }
 
 
     if (displayValue == 0 || operationSelected == true){
@@ -358,6 +424,7 @@ function handleKey(e){
     display.textContent = new Intl.NumberFormat().format(displayValue);
     operationSelected = false;  }  
     }
+    
 }
 
 //Event listeners
