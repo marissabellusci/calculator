@@ -337,11 +337,18 @@ function secondNumberFlag(){
 function handleKey(e){
     console.log(e.keyCode);
 
+    if (e.keyCode >= 65 && e.keyCode <=90) return;
+
     if (e.keyCode == 13 || e.key == "="){
         operate();
     }
 
-    if (e.keyCode < 48 || e.keyCode > 57 && !e.keyCode == 187 || !e.keyCode == 191 || !e.keyCode == 189 || !e.keyCode == 13) return;
+    if (e.keyCode == 8){
+        clearDisplayValue();
+    }
+
+    if (e.keyCode < 48 || e.keyCode > 57 && !e.keyCode == 187 || !e.keyCode == 191 || !e.keyCode == 189 || !e.keyCode == 13 || !e.key == "=" || !e.keyCode == 8) return;
+
 
     if (e.key == "*"){
 
