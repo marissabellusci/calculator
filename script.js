@@ -34,6 +34,9 @@ function operate(operator,a,b){
     }
 }
 
+function expo(x, f) {
+    return Number.parseFloat(x).toExponential(f);
+  }
 
 // Variables & Constants
 
@@ -70,8 +73,14 @@ function updateDisplayValue(e){
 
         else {
         displayValue = displayValue + e.target.value;
-        display.textContent = displayValue;
-        operationSelected = false;    
+        if (displayValue.toString().length > 11) {
+            console.log(expo(displayValue,3))
+            display.textContent = expo(displayValue,3);
+            operationSelected = false;    
+        }
+        if (displayValue.toString().length <=11) {
+        display.textContent = new Intl.NumberFormat().format(displayValue);
+        operationSelected = false;  }  
         }
     
         
@@ -98,19 +107,27 @@ function clearDisplayValue(){
 function operate(){
 
     if(localStorage.getItem("secondNumber")){
-    let a = localStorage.getItem("firstNumber");
-    let b = localStorage.getItem("secondNumber");
+    let a = localStorage.getItem("firstNumber").split(',').join("");
+    let b = localStorage.getItem("secondNumber").split(',').join("");
         
         if (localStorage.getItem("operator") == "+"){
             solution = add(a,b);
             console.log(solution);
             localStorage.setItem("firstNumber", solution);
             localStorage.setItem("solution",solution);
+
+            if (localStorage.getItem("solution").toString().length > 11){
+                display.textContent = expo(localStorage.getItem("solution"),3);
+               localStorage.removeItem("solution");
+               localStorage.removeItem("secondNumber");
+               localStorage.removeItem("operator"); 
+               }
             
-            display.textContent = localStorage.getItem("solution");
+            if (localStorage.getItem("solution").toString().length <= 11){
+            display.textContent = new Intl.NumberFormat().format(localStorage.getItem("solution"));
             localStorage.removeItem("solution");
             localStorage.removeItem("secondNumber");
-            localStorage.removeItem("operator");
+            localStorage.removeItem("operator");}
         }    
 
         if (localStorage.getItem("operator") == "-"){
@@ -119,10 +136,18 @@ function operate(){
             localStorage.setItem("firstNumber", solution);
             localStorage.setItem("solution",solution);
             
-            display.textContent = localStorage.getItem("solution");
+            if (localStorage.getItem("solution").toString().length > 11){
+                display.textContent = expo(localStorage.getItem("solution"),3);
+               localStorage.removeItem("solution");
+               localStorage.removeItem("secondNumber");
+               localStorage.removeItem("operator"); 
+               }
+            
+            if (localStorage.getItem("solution").toString().length <= 11){
+            display.textContent = new Intl.NumberFormat().format(localStorage.getItem("solution"));
             localStorage.removeItem("solution");
             localStorage.removeItem("secondNumber");
-            localStorage.removeItem("operator");
+            localStorage.removeItem("operator");}
         }    
 
         if (localStorage.getItem("operator") == "x"){
@@ -131,10 +156,18 @@ function operate(){
             localStorage.setItem("firstNumber", solution);
             localStorage.setItem("solution",solution);
             
-            display.textContent = localStorage.getItem("solution");
+            if (localStorage.getItem("solution").toString().length > 11){
+                display.textContent = expo(localStorage.getItem("solution"),3);
+               localStorage.removeItem("solution");
+               localStorage.removeItem("secondNumber");
+               localStorage.removeItem("operator"); 
+               }
+            
+            if (localStorage.getItem("solution").toString().length <= 11){
+            display.textContent = new Intl.NumberFormat().format(localStorage.getItem("solution"));
             localStorage.removeItem("solution");
             localStorage.removeItem("secondNumber");
-            localStorage.removeItem("operator");
+            localStorage.removeItem("operator");}
         }    
 
         if (localStorage.getItem("operator") == "/"){
@@ -149,30 +182,47 @@ function operate(){
             localStorage.setItem("firstNumber", solution);
             localStorage.setItem("solution",solution);
             
-            display.textContent = localStorage.getItem("solution");
+            if (localStorage.getItem("solution").toString().length > 11){
+                display.textContent = expo(localStorage.getItem("solution"),3);
+               localStorage.removeItem("solution");
+               localStorage.removeItem("secondNumber");
+               localStorage.removeItem("operator"); 
+               }
+            
+            if (localStorage.getItem("solution").toString().length <= 11){
+            display.textContent = new Intl.NumberFormat().format(localStorage.getItem("solution"));
             localStorage.removeItem("solution");
             localStorage.removeItem("secondNumber");
-            localStorage.removeItem("operator");
+            localStorage.removeItem("operator");}
             }
         } 
         
     }
 
     if(!localStorage.getItem("secondNumber")){
-        let a = localStorage.getItem("firstNumber");
+        let a = localStorage.getItem("firstNumber").split(',').join("");
         localStorage.setItem("secondNumber",display.textContent);
-        let b = localStorage.getItem("secondNumber");
+        let b = localStorage.getItem("secondNumber").split(',').join("");
             
             if (localStorage.getItem("operator") == "+"){
                 solution = add(a,b);
                 console.log(solution);
                 localStorage.setItem("firstNumber", solution);
                 localStorage.setItem("solution",solution);
+
+                if (localStorage.getItem("solution").toString().length > 11){
+                    display.textContent = expo(localStorage.getItem("solution"),3);
+                   localStorage.removeItem("solution");
+                   localStorage.removeItem("secondNumber");
+                   localStorage.removeItem("operator"); 
+                   }
                 
-                display.textContent = localStorage.getItem("solution");
+                if (localStorage.getItem("solution").toString().length <= 11){
+                display.textContent = new Intl.NumberFormat().format(localStorage.getItem("solution"));
                 localStorage.removeItem("solution");
                 localStorage.removeItem("secondNumber");
-                localStorage.removeItem("operator");
+                localStorage.removeItem("operator");}
+            
             }    
     
             if (localStorage.getItem("operator") == "-"){
@@ -181,10 +231,18 @@ function operate(){
                 localStorage.setItem("firstNumber", solution);
                 localStorage.setItem("solution",solution);
                 
-                display.textContent = localStorage.getItem("solution");
+                if (localStorage.getItem("solution").toString().length > 11){
+                    display.textContent = expo(localStorage.getItem("solution"),3);
+                   localStorage.removeItem("solution");
+                   localStorage.removeItem("secondNumber");
+                   localStorage.removeItem("operator"); 
+                   }
+                
+                if (localStorage.getItem("solution").toString().length <= 11){
+                display.textContent = new Intl.NumberFormat().format(localStorage.getItem("solution"));
                 localStorage.removeItem("solution");
                 localStorage.removeItem("secondNumber");
-                localStorage.removeItem("operator");
+                localStorage.removeItem("operator");}
             }    
     
             if (localStorage.getItem("operator") == "x"){
@@ -193,10 +251,18 @@ function operate(){
                 localStorage.setItem("firstNumber", solution);
                 localStorage.setItem("solution",solution);
 
-                display.textContent = localStorage.getItem("solution");
+                if (localStorage.getItem("solution").toString().length > 11){
+                    display.textContent = expo(localStorage.getItem("solution"),3);
+                   localStorage.removeItem("solution");
+                   localStorage.removeItem("secondNumber");
+                   localStorage.removeItem("operator"); 
+                   }
+                
+                if (localStorage.getItem("solution").toString().length <= 11){
+                display.textContent = new Intl.NumberFormat().format(localStorage.getItem("solution"));
                 localStorage.removeItem("solution");
                 localStorage.removeItem("secondNumber");
-                localStorage.removeItem("operator");
+                localStorage.removeItem("operator");}
             }    
     
             if (localStorage.getItem("operator") == "/"){
@@ -211,10 +277,18 @@ function operate(){
                 localStorage.setItem("firstNumber", solution);
                 localStorage.setItem("solution",solution);
                 
-                display.textContent = localStorage.getItem("solution");
+                if (localStorage.getItem("solution").toString().length > 11){
+                    display.textContent = expo(localStorage.getItem("solution"),3);
+                   localStorage.removeItem("solution");
+                   localStorage.removeItem("secondNumber");
+                   localStorage.removeItem("operator"); 
+                   }
+                
+                if (localStorage.getItem("solution").toString().length <= 11){
+                display.textContent = new Intl.NumberFormat().format(localStorage.getItem("solution"));
                 localStorage.removeItem("solution");
                 localStorage.removeItem("secondNumber");
-                localStorage.removeItem("operator");
+                localStorage.removeItem("operator");}
                 }
             }    
            
