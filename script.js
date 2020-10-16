@@ -332,6 +332,34 @@ function secondNumberFlag(){
     noSecondNumber = true;
 }
 
+//KEYBOARD FUNCTIONALITY
+
+function handleKey(e){
+    console.log(e.keyCode);
+
+    if (e.keyCode < 48 || e.keyCode > 57) return;
+
+
+    if (displayValue == 0 || operationSelected == true){
+    displayValue = e.key;
+    display.textContent=displayValue;
+    operationSelected = false;
+    }
+
+
+    else {
+    displayValue = displayValue + e.key;
+    if (displayValue.toString().length > 11) {
+        console.log(expo(displayValue,3))
+        display.textContent = expo(displayValue,3);
+        operationSelected = false;    
+    }
+    if (displayValue.toString().length <=11) {
+    display.textContent = new Intl.NumberFormat().format(displayValue);
+    operationSelected = false;  }  
+    }
+}
+
 //Event listeners
 
 digits.forEach(digit => digit.addEventListener("click", updateDisplayValue));
@@ -340,3 +368,4 @@ clr.addEventListener("click",clearDisplayValue);
 equals.addEventListener("click",operate);
 equals.addEventListener("click", secondNumberFlag);
 
+window.addEventListener("keyup", handleKey);
