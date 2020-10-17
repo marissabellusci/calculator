@@ -48,10 +48,12 @@ let body = document.querySelector("body");
 let title = document.querySelector("h1");
 let digitButtons = document.querySelector("digit-buttons");
 let clr = document.querySelector(".clear");
+let decimal = document.querySelector(".decimal");
 let equals = document.querySelector(".equals");
 let operationSelected = false;
 let noSecondNumber = true;
 let solution = null;
+let decimalJustAdded = false;
 
 
 let displayValue = 0;
@@ -63,7 +65,9 @@ function updateDisplayValue(e){
         if (e.target == container || e.target == html || e.target == body || e.target == title || e.target == display || e.target == digitButtons || e.target.value == undefined){
             return;
          }
-         console.log(e.target.value);
+
+        console.log(e.target.value);
+         
          if (displayValue == 0 || operationSelected == true){
         displayValue = e.target.value;
         display.textContent=displayValue;
@@ -72,6 +76,12 @@ function updateDisplayValue(e){
 
 
         else {
+
+        if (decimalJustAdded == true){
+            displayValue = displayValue.slice(0, -1);
+            decimalJustAdded = false;
+        }
+
         displayValue = displayValue + e.target.value;
         if (displayValue.toString().length > 11) {
             console.log(expo(displayValue,3))
@@ -434,11 +444,23 @@ function handleKey(e){
     
 }
 
+//ADD DECIMAL
+
+function addDecimal(){
+    console.log("adding decimal");
+    displayValue = parseFloat(displayValue).toFixed(1);
+    display.textContent=displayValue;
+    operationSelected = false;
+    decimalJustAdded = true;
+}
+
 //Event listeners
 
 digits.forEach(digit => digit.addEventListener("click", updateDisplayValue));
 operators.forEach(operator => operator.addEventListener("click", saveValueAndOperation))
 clr.addEventListener("click",clearDisplayValue);
+decimal.addEventListener("click",addDecimal)
+
 equals.addEventListener("click",operate);
 equals.addEventListener("click", secondNumberFlag);
 

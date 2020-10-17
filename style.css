@@ -53,15 +53,18 @@ body {
     height: 65vh;
 }
 
+/*
 div.digit {
     border: none;
     background:none;
 }
+*/
 
 .digit,
 .operator,
 .equals,
-.clear {
+.clear,
+.decimal{
     border: solid;
     border-radius: 50%;
     padding: 2vw;
@@ -85,16 +88,31 @@ div.digit {
 .digit:hover,
 .operator:hover,
 .equals:hover,
-.clear:hover{
+.clear:hover,
+.decimal:hover{
     box-shadow: 2px 2px 2px inset gray, 3px 3px 3px inset lightgray;
 }
 
-.operator {
-    margin: auto;
+.operator,
+.equals {
+    margin: .5rem auto .5rem auto;
+    padding: 1rem;
     background: thistle;
     color: white;
     font-size: 3rem;
     box-shadow: 2px 2px 2px gray, 3px 3px 3px lightgray;
+    width: 2vw;
+    height: 2vw;
+}
+
+.equals {
+    background-color: thistle;
+    color: white;
+    box-shadow:  2px 2px 20px white;
+}
+
+.equals:hover {
+    box-shadow: 2px 2px 2px inset gray, 3px 3px 3px inset lightgray, 2px 2px 30px white;
 }
 
 .operator-buttons {
@@ -111,22 +129,16 @@ div.digit {
     box-shadow: 2px 2px 2px gray, 3px 3px 3px lightgray;
 }
 
-.equals-and-clear-buttons{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    transform: translateY(-7vw);
-}
 
-.equals {
-    transform: translateX(-5vw);
+.decimal {
     background: rgb(100, 58, 58);
     color: white;
     border-color: black;
+    margin: none;
 }
 
 .clear {
-    transform: translateX(5vw);
+    transform: translateX(28vw) translateY(-6.5vw);
     background:  rgb(100, 58, 58);
     color: white;
     border-color: black;
